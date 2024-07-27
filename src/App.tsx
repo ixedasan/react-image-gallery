@@ -17,6 +17,7 @@ import {
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable'
 
+import { Image } from './components/Image'
 import { initialImageData } from './data/data'
 import { IImageGallery } from './types/global.types'
 
@@ -50,6 +51,20 @@ function App() {
     }
   }
 
+  const handleSelectImage = (id: string | number) => {
+    setData(items =>
+      items.map(item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            isSelected: !item.isSelected,
+          }
+        }
+        return item
+      }),
+    )
+  }
+
   return (
     <div className="min-h-screen">
       <div className="container flex flex-col items-center">
@@ -62,17 +77,14 @@ function App() {
           >
             <div className="grid grid-cols-2 gap-6 p-8 md:grid-cols-3 lg:grid-cols-5">
               <SortableContext items={data} strategy={rectSortingStrategy}>
-                {data.map((item, index) => (
-                  <div
+                {data.map(item => (
+                  <Image
                     key={item.id}
-                    className={`relative flex h-32 w-full cursor-move items-center justify-center rounded-lg bg-gray-200 ${activeItem?.id === item.id ? 'bg-blue-200' : ''}`}
-                  >
-                    <img
-                      src={item.url}
-                      alt={`Image ${index + 1}`}
-                      className="h-full w-full rounded-lg object-cover"
-                    />
-                  </div>
+                    id={item.id}
+                    url={item.url}
+                    isSelected={item.isSelected}
+                    onClick={handleSelectImage}
+                  />
                 ))}
               </SortableContext>
             </div>
