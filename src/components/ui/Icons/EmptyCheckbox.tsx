@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
 
-const EmptyCheckboxIcon = ({
+const EmptyCheckbox = ({
   width = '24',
   color = 'white',
   boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -31,4 +31,4 @@ const EmptyCheckboxIcon = ({
   )
 }
 
-export default EmptyCheckboxIcon
+export default EmptyCheckbox
