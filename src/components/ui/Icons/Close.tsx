@@ -15,7 +15,6 @@ const Close = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', borderRadius: '4px' }}
     >
       <circle cx="12" cy="12" r="10" stroke={color} strokeWidth="1.5" />
       <path

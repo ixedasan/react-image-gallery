@@ -17,6 +17,7 @@ import {
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable'
 
+import { AddImageCard } from './components/AddImageCard'
 import { Image } from './components/Image'
 import { initialImageData } from './data/data'
 import { IImageGallery } from './types/global.types'
@@ -87,6 +88,7 @@ function App() {
                   />
                 ))}
               </SortableContext>
+              <AddImageCard setData={setData} />
             </div>
           </DndContext>
         </div>
