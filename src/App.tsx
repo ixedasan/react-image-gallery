@@ -3,6 +3,7 @@ import {
   closestCenter,
   DndContext,
   DragEndEvent,
+  DragOverlay,
   DragStartEvent,
   KeyboardSensor,
   PointerSensor,
@@ -19,6 +20,7 @@ import {
 
 import { AddImageCard } from './components/AddImageCard'
 import { Image } from './components/Image'
+import { Overlay } from './components/Overlay'
 import { initialImageData } from './data/data'
 import { IImageGallery } from './types/global.types'
 
@@ -89,6 +91,14 @@ function App() {
                 ))}
               </SortableContext>
               <AddImageCard setData={setData} />
+              <DragOverlay adjustScale={true} wrapperElement="div">
+                {activeItem ? (
+                  <Overlay
+                    url={activeItem.url}
+                    className="absolute z-50 h-full w-full"
+                  />
+                ) : null}
+              </DragOverlay>
             </div>
           </DndContext>
         </div>
