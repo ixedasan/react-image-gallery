@@ -32,7 +32,7 @@ export const AddImageCard = ({ setData }: IAddImageCard) => {
             },
           ])
         }
-        reader.readAsDataURL(imageFile)
+        reader.readAsDataURL(imageFile as Blob)
       })
     } else if (imageUrl) {
       setData(prev => [
