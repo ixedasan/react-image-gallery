@@ -19,6 +19,7 @@ import {
 } from '@dnd-kit/sortable'
 
 import { AddImageCard } from './components/AddImageCard'
+import { Header } from './components/Header'
 import { Image } from './components/Image'
 import { Overlay } from './components/Overlay'
 import { initialImageData } from './data/data'
@@ -68,10 +69,15 @@ function App() {
     )
   }
 
+  const handleDeleteImage = (selectedItems: IImageGallery[]) => {
+    setData(items => items.filter(item => !selectedItems.includes(item)))
+  }
+
   return (
     <div className="min-h-screen">
       <div className="container flex flex-col items-center">
         <div className="my-8 grid max-w-5xl divide-y rounded-lg bg-white shadow">
+          <Header onDelete={handleDeleteImage} data={data} />
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
