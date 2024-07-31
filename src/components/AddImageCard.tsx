@@ -17,21 +17,23 @@ export const AddImageCard = ({ setData }: IAddImageCard) => {
   const handleImageSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const imageUrl = event.currentTarget['image-url'].value
-    const imageFile = event.currentTarget['image-file'].files[0]
+    const imageFiles = event.currentTarget['image-files'].files
 
-    if (imageFile) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setData(prev => [
-          ...prev,
-          {
-            id: nanoid(),
-            url: reader.result as string,
-            isSelected: false,
-          },
-        ])
-      }
-      reader.readAsDataURL(imageFile)
+    if (imageFiles.length > 0) {
+      Array.from(imageFiles).forEach(imageFile => {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          setData(prev => [
+            ...prev,
+            {
+              id: nanoid(),
+              url: reader.result as string,
+              isSelected: false,
+            },
+          ])
+        }
+        reader.readAsDataURL(imageFile)
+      })
     } else if (imageUrl) {
       setData(prev => [
         ...prev,
@@ -86,8 +88,9 @@ export const AddImageCard = ({ setData }: IAddImageCard) => {
           <p className="my-2 text-center font-semibold">or</p>
           <input
             type="file"
-            name="image-file"
+            name="image-files"
             accept="image/*"
+            multiple
             className="w-full rounded border border-gray-300 p-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-emerald-600"
           />
           <div className="mt-6 flex justify-center">
@@ -95,7 +98,7 @@ export const AddImageCard = ({ setData }: IAddImageCard) => {
               type="submit"
               className="rounded bg-gray-700 px-8 py-2.5 text-white transition-colors hover:bg-black"
             >
-              Add Image
+              Add Images
             </button>
           </div>
         </form>
